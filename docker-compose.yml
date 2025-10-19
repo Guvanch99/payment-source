@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  postgres:
+    container_name: payment-source-postgres
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - payment-source
+
+volumes:
+  postgres_data:
+
+networks:
+  payment-source:
+
